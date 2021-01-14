@@ -38,9 +38,11 @@
                 <label for="teacher">Prof</label>
                 <select name="teacher" id="teacher" class="form-control">
                     <option value="0">-</option>
-                    <option value="1">Prénom Prof - Formateur PHP/MySQL</option>
-                    <option value="2">Prénom2 Prof2 - Formateur PHP/MySQL</option>
-                    <option value="5">sgsg fsgfsg - sg</option>
+                    <!-- Affichage dynamique des options des profs -->
+                    <?php foreach ($teachers as $teacher) : ?>
+                        
+                    <option value="<?= $teacher->getId(); ?>"><?= $teacher->getFirstname(); ?> - <?= $teacher->getJob(); ?></option>
+                    <?php endforeach; ?>
                 </select>
                 <!-- Affichage des erreurs champ par champ -->
                 <?php if (isset($errors['teacher'])) : ?>
