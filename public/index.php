@@ -79,6 +79,28 @@ $router->map(
     'student-list'
 );
 
+// Route pour afficher le formulaire d'ajout d'un etudiant
+$router->map(
+    'GET',
+    '/student/add',
+    [
+        'method' => 'add',
+        'controller' => '\App\Controllers\StudentController'
+    ],
+    'student-add'
+);
+
+// Route qui recevra l'envoi du formulaire d'ajout d'un etudiant
+$router->map(
+    'POST',
+    '/student/add',
+    [
+        'method' => 'addPost',
+        'controller' => '\App\Controllers\StudentController'
+    ],
+    'student-addpost'
+);
+
 
 // ========================================
 // Dispatcher

@@ -27,4 +27,78 @@ class StudentController extends CoreController
 
         $this->show('student/list', $viewVars);
     }
+
+    /**
+     * Methode add
+     * Elle affiche le formulaire d'ajout d'un etudiant
+     *
+     * @return void
+     */
+    public function add() : void
+    {
+        // Il faut afficher la page pour ajouter un etudiant
+
+        // Et j'affiche la page
+        $this->show('student/add');
+    }
+
+    /**
+     * Methode addPost
+     * Elle recoit le formulaire d'ajout et insere dans la BDD
+     *
+     * @return void
+     */
+    public function addPost() : void
+    {
+        // On commence par récupérer et filtrer les données du formulaire
+        $firstname = filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING);
+        $lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING);
+        $status = filter_input(INPUT_POST, 'status', FILTER_SANITIZE_NUMBER_INT);
+        $teacher = filter_input(INPUT_POST, 'teacher', FILTER_SANITIZE_NUMBER_INT);
+
+        // On créé un tableau qui recevra les erreurs
+        $errorList = [];
+
+        // On verifie que les champs ne sont pas vides
+        if (empty($firstname)) {
+            $errorList['prenom'] = 'Le champ Prénom n\'est pas correctement remplit';
+        }
+        if (empty($lastname)) {
+            $errorList['nom'] = 'Le champ Nom n\'est pas correctement remplit';
+        }
+        if (empty($status)) {
+            $errorList['status'] = 'Le champ Status n\'est pas correctement remplit';
+        }
+        if (empty($teacher)) {
+            $errorList['teacher'] = 'Le champ Prof n\'est pas correctement remplit';
+        }
+
+        // S'il n'y a pas eu d'erreur jusque là, on peut inserer dans la BDD
+        if (empty($errorList)) {
+            // On commence par créé un nouvel objet Student
+            $student = new Student();
+
+            // On lui definit ses propriétés
+            $student->setFirstname($firstname);
+            $student->setLastname($lastname);
+            $student->setStatus($status);
+
+            // Puis on insere dans la BDD avec une condition pour verifier la reussite de la requete
+            if ($student->save()) {
+                // Si ca a reussi, on redirige vers la liste des etudiants
+                $this->list();
+            }
+            else {
+                // Sinon on ajoute une erreur dans $errorList et on affiche le formulaire d'ajout
+                $errorList['autre'] = 'L\'insertion en base de données à échouee';
+
+                // On passe les erreur en argument de show
+                $viewVars = [
+                    'errors' => $errorList,
+                ];
+
+                $this->show('student/add', $viewVars);
+            }
+        }
+    }
 }

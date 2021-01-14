@@ -1,4 +1,4 @@
-<a href="add.html" class="btn btn-success float-right">Ajouter</a>
+<a href="<?= $router->generate('student-add'); ?>" class="btn btn-success float-right">Ajouter</a>
 
         <h2>Liste des &Eacute;tudiants</h2>
         <table class="table table-hover mt-4">
