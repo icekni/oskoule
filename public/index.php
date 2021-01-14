@@ -135,6 +135,39 @@ $router->map(
     'student-addpost'
 );
 
+// Route pour afficher le formulaire d'edition d'un etudiant
+$router->map(
+    'GET',
+    '/student/edit/[i:id]',
+    [
+        'method' => 'edit',
+        'controller' => '\App\Controllers\StudentController'
+    ],
+    'student-edit'
+);
+
+// Route qui recevra l'envoi du formulaire d'edition d'un etudiant
+$router->map(
+    'POST',
+    '/student/edit/[i:id]',
+    [
+        'method' => 'editPost',
+        'controller' => '\App\Controllers\StudentController'
+    ],
+    'student-editpost'
+);
+
+// Route pour afficher le formulaire de suppression d'un etudiant
+$router->map(
+    'GET',
+    '/student/delete/[i:id]',
+    [
+        'method' => 'delete',
+        'controller' => '\App\Controllers\StudentController'
+    ],
+    'student-delete'
+);
+
 // --------------------------------
 // Route de connexion/deconnexion
 
