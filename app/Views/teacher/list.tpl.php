@@ -20,7 +20,7 @@
                     <th scope="row"><?= $teacher->getId(); ?></th>
                     <td><?= $teacher->getFirstname(); ?></td>
                     <td><?= $teacher->getLastname(); ?></td>
-                    <td><?= $teacher->getStatus(); ?></td>
+                    <td><?= $teacher->getJob(); ?></td>
                     <td class="text-right">
                         <a href="edit.html" class="btn btn-sm btn-warning">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

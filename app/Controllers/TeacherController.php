@@ -25,7 +25,6 @@ class TeacherController extends CoreController
             'teachers' => $teachers,
         ];        
 
-        // La home n'a pas besoin d'avoir de donnée fournie, donc on l'appelle telle quelle
         $this->show('teacher/list', $viewVars);
     }
 }

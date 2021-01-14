@@ -5,7 +5,6 @@ namespace App\Models;
 class Teacher extends CoreModel
 {
     private $job;
-    private $status;
 
     /**
      * Get the value of job
