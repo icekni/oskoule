@@ -18,7 +18,13 @@ class UserController extends CoreController
         $this->show('user/login');
     }
 
-    public function loginpost()
+    /**
+     * Methode loginpost
+     * Recoit les infos du formulaire de connexion
+     *
+     * @return void
+     */
+    public function loginpost() : void
     {
         // On commence par recuperer les données du formulaire
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
@@ -74,4 +80,21 @@ class UserController extends CoreController
         }
     }
 
+    public function logout()
+    {
+        // Il faut enlever de la session l'id de l'user et l'objet user
+        unset($_SESSION['userId']);
+        unset($_SESSION['userObject']);
+
+        // On prepare un message a afficher
+        $errorList['autre'] = 'Vous avez été déconnecté';
+
+        // On transmet a la vue via $viewVars
+        $viewVars = [
+            'errors' => $errorList,
+        ];
+
+        // Puis on redirige vers la page de connexion
+        $this->show('user/login', $viewVars);
+    }
 }

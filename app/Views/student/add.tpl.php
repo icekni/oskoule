@@ -1,19 +1,38 @@
-<?php 
-dump($errors) ;
-?>
-
 
         <a href="<?= $router->generate('student-list'); ?>" class="btn btn-success float-right">Retour</a>
         <h2>Ajouter un étudiant</h2>
+        <!-- Affichage des erreurs -->
+        <?php if (isset($errors['autre'])) : ?>
+        
+        <div class="alert alert-danger" role="alert">
+        <?= $errors['autre']; ?>
+        </div>
+        <?php endif; ?>                
 
         <form action="" method="POST" class="mt-5">
             <div class="form-group">
                 <label for="firstname">Prénom</label>
                 <input type="text" class="form-control" name="firstname" id="firstname" placeholder="" value="">
+                <!-- Affichage des erreurs champ par champ -->
+                <?php if (isset($errors['prenom'])) : ?>
+                
+                <div class="alert alert-danger" role="alert">
+                <?= $errors['prenom']; ?>
+                </div>
+                <?php endif; ?>
+                
             </div>
             <div class="form-group">
                 <label for="lastname">Nom</label>
                 <input type="text" class="form-control" name="lastname" id="lastname" placeholder="" value="">
+                <!-- Affichage des erreurs champ par champ -->
+                <?php if (isset($errors['nom'])) : ?>
+                
+                <div class="alert alert-danger" role="alert">
+                <?= $errors['nom']; ?>
+                </div>
+                <?php endif; ?>
+                
             </div>
             <div class="form-group">
                 <label for="teacher">Prof</label>
@@ -23,6 +42,14 @@ dump($errors) ;
                     <option value="2">Prénom2 Prof2 - Formateur PHP/MySQL</option>
                     <option value="5">sgsg fsgfsg - sg</option>
                 </select>
+                <!-- Affichage des erreurs champ par champ -->
+                <?php if (isset($errors['teacher'])) : ?>
+                
+                <div class="alert alert-danger" role="alert">
+                <?= $errors['teacher']; ?>
+                </div>
+                <?php endif; ?>
+                
             </div>
             <div class="form-group">
                 <label for="status">Statut</label>
@@ -31,6 +58,14 @@ dump($errors) ;
                     <option value="1">actif</option>
                     <option value="2">désactivé</option>
                 </select>
+                <!-- Affichage des erreurs champ par champ -->
+                <?php if (isset($errors['status'])) : ?>
+                
+                <div class="alert alert-danger" role="alert">
+                <?= $errors['status']; ?>
+                </div>
+                <?php endif; ?>
+                
             </div>
             <button type="submit" class="btn btn-primary btn-block mt-5">Valider</button>
         </form>

@@ -8,20 +8,20 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
+                    <li class="nav-item<?= $currentPage === 'main/home' ? ' active' : '' ?>">
                         <a class="nav-link" href="<?= $router->generate('main-home'); ?>">Accueil</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item<?= $currentPage === 'teacher/list' ? ' active' : '' ?>">
                         <a class="nav-link" href="<?= $router->generate('teacher-list'); ?>">Profs</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item<?= $currentPage === 'student/list' ? ' active' : '' ?>">
                         <a class="nav-link" href="<?= $router->generate('student-list'); ?>">Etudiants</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../appuser/list.html">Utilisateurs</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">Se déconnecter</a>
+                    <li class="nav-item<?= $currentPage === 'user/logout' ? ' active' : '' ?>">
+                        <a class="nav-link" href="<?= $router->generate('user-logout'); ?>">Se déconnecter</a>
                     </li>
                 </ul>
             </div>

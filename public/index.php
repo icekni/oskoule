@@ -127,6 +127,17 @@ $router->map(
     'user-loginpost'
 );
 
+// Route pour se connecter
+$router->map(
+    'GET',
+    '/logout',
+    [
+        'method' => 'logout',
+        'controller' => '\App\Controllers\UserController'
+    ],
+    'user-logout'
+);
+
 // ========================================
 // Dispatcher
 // ========================================
