@@ -1,6 +1,3 @@
-<?php 
-dump($_SESSION);
-?>
 
         <p class="display-5">
             Bienvenue dans le backOffice <strong>d'une école 100% en ligne formant des développeurs Web</strong>...
