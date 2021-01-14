@@ -31,6 +31,17 @@ $router->map(
 );
 
 // --------------------------------
+// Routes Teacher
+
+$router->map(
+    'GET',
+    '/teacher/list',
+    [
+        'method' => 'list',
+        'controller' => '\App\Controllers\TeacherController'
+    ],
+    'teacher-list'
+);
 
 
 // ========================================
