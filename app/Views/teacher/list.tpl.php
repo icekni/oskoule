@@ -22,7 +22,7 @@
                     <td><?= $teacher->getLastname(); ?></td>
                     <td><?= $teacher->getJob(); ?></td>
                     <td class="text-right">
-                        <a href="edit.html" class="btn btn-sm btn-warning">
+                        <a href="<?= $router->generate('teacher-edit', ['id' => $teacher->getId()]); ?>" class="btn btn-sm btn-warning">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         </a>
                         <div class="btn-group">

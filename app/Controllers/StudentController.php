@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Student;
+use App\Models\Teacher;
 
 class StudentController extends CoreController
 {
@@ -37,9 +38,16 @@ class StudentController extends CoreController
     public function add() : void
     {
         // Il faut afficher la page pour ajouter un etudiant
+        // Pour dynamiser le select correspondant aux profs, il faut recuperer tout les profs
+        $teachers = Teacher::findAll();
+
+        // Puis les passer a la vue
+        $viewVars = [
+            'teachers' => $teachers,
+        ];
 
         // Et j'affiche la page
-        $this->show('student/add');
+        $this->show('student/add', $viewVars);
     }
 
     /**

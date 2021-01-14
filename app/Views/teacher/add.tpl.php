@@ -13,7 +13,7 @@
         <form method="POST" class="mt-5">
             <div class="form-group">
                 <label for="firstname">Prénom</label>
-                <input type="text" class="form-control" name="firstname" id="firstname" placeholder="" value="">
+                <input type="text" class="form-control" name="firstname" id="firstname" placeholder="" value="<?= isset($teacher) ? $teacher->getFirstname() : ''; ?>">
                 <!-- Affichage des erreurs champ par champ -->
                 <?php if (isset($errors['prenom'])) : ?>
                 
@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label for="lastname">Nom</label>
-                <input type="text" class="form-control" name="lastname" id="lastname" placeholder="" value="">
+                <input type="text" class="form-control" name="lastname" id="lastname" placeholder="" value="<?= isset($teacher) ? $teacher->getLastname() : ''; ?>">
                 <!-- Affichage des erreurs champ par champ -->
                 <?php if (isset($errors['nom'])) : ?>
                 
@@ -37,7 +37,7 @@
             </div>
             <div class="form-group">
                 <label for="job">Titre</label>
-                <input type="text" class="form-control" name="job" id="job" placeholder="" value="">
+                <input type="text" class="form-control" name="job" id="job" placeholder="" value="<?= isset($teacher) ? $teacher->getJob() : ''; ?>">
                 <!-- Affichage des erreurs champ par champ -->
                 <?php if (isset($errors['job'])) : ?>
                 
@@ -51,8 +51,8 @@
                 <label for="status">Statut</label>
                 <select name="status" id="status" class="form-control">
                     <option value="0">-</option>
-                    <option value="1">actif</option>
-                    <option value="2">désactivé</option>
+                    <option value="1"<?= isset($teacher) && $teacher->getStatus() == '1' ? ' selected' : ''; ?>>actif</option>
+                    <option value="2"<?= isset($teacher) && $teacher->getStatus() == '2' ? ' selected' : ''; ?>>désactivé</option>
                 </select>
                 <!-- Affichage des erreurs champ par champ -->
                 <?php if (isset($errors['status'])) : ?>

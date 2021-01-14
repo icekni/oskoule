@@ -67,6 +67,28 @@ $router->map(
     'teacher-addpost'
 );
 
+// Route pour afficher le formulaire d'ajout d'un prof
+$router->map(
+    'GET',
+    '/teacher/edit/[i:id]',
+    [
+        'method' => 'edit',
+        'controller' => '\App\Controllers\TeacherController'
+    ],
+    'teacher-edit'
+);
+
+// Route qui recevra l'envoi du formulaire d'ajout d'un prof
+$router->map(
+    'POST',
+    '/teacher/edit/[i:id]',
+    [
+        'method' => 'editPost',
+        'controller' => '\App\Controllers\TeacherController'
+    ],
+    'teacher-editpost'
+);
+
 // --------------------------------
 // Routes Student
 
