@@ -66,7 +66,8 @@ class StudentController extends CoreController
         if (empty($lastname)) {
             $errorList['nom'] = 'Le champ Nom n\'est pas correctement remplit';
         }
-        if (empty($status)) {
+        // Le champ status devra avoir comme valeur, soit 1, soit 2
+        if (empty($status) || preg_match('`[1-2]`', $status)) {
             $errorList['status'] = 'Le champ Status n\'est pas correctement remplit';
         }
         if (empty($teacher)) {
@@ -91,14 +92,19 @@ class StudentController extends CoreController
             else {
                 // Sinon on ajoute une erreur dans $errorList et on affiche le formulaire d'ajout
                 $errorList['autre'] = 'L\'insertion en base de données à échouee';
-
-                // On passe les erreur en argument de show
-                $viewVars = [
-                    'errors' => $errorList,
-                ];
-
-                $this->show('student/add', $viewVars);
             }
         }
+
+        // S'il y a eu des erreurs, alors on redirige vers la page de login
+        if (!empty($errorList)) {
+            // On stocke les erreurs dans $viewVars
+            $viewVars = [
+                'errors' => $errorList,
+            ];
+
+            // On affiche la page de login
+            $this->show('student/add', $viewVars);
+        }
+        
     }
 }

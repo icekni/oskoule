@@ -1,3 +1,6 @@
+<?php 
+dump($errors) ;
+?>
 
 
         <a href="<?= $router->generate('student-list'); ?>" class="btn btn-success float-right">Retour</a>

@@ -92,14 +92,18 @@ class TeacherController extends CoreController
             else {
                 // Sinon on ajoute une erreur dans $errorList et on affiche le formulaire d'ajout
                 $errorList['autre'] = 'L\'insertion en base de données à échouee';
-
-                // On passe les erreur en argument de show
-                $viewVars = [
-                    'errors' => $errorList,
-                ];
-
-                $this->show('teacher/add', $viewVars);
             }
+        }
+
+        // S'il y a eu des erreurs, alors on redirige vers la page de login
+        if (!empty($errorList)) {
+            // On stocke les erreurs dans $viewVars
+            $viewVars = [
+                'errors' => $errorList,
+            ];
+
+            // On affiche la page de login
+            $this->show('teacher/add', $viewVars);
         }
     }
 }
