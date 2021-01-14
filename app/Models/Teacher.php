@@ -45,9 +45,9 @@ class Teacher extends CoreModel
      * Elle permet de retourner toutes les infos du prof dont l'id est passé en argument
      *
      * @param [type] $teacherId est l'id du prof
-     * @return object
+     * @return object ou bool
      */
-    public static function find($teacherId): object
+    public static function find($teacherId)
     {
         // On se connecte a la DB
         $pdo = Database::getPDO();
@@ -116,6 +116,12 @@ class Teacher extends CoreModel
         return ($query->rowCount() > 0);
     }
 
+    /**
+     * Methode update
+     * Met a jour un prof dans la BDD
+     *
+     * @return boolean
+     */
     public function update(): bool
     {
         // On se connecte a la BDD
@@ -141,6 +147,36 @@ class Teacher extends CoreModel
         $query->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
         $query->bindValue(':job', $this->job, PDO::PARAM_STR);
         $query->bindValue(':status', $this->status, PDO::PARAM_INT);
+        $query->bindValue(':id', $this->id, PDO::PARAM_INT);
+
+        // Puis on execute la requete
+        $query->execute();
+
+        // Si au moin une ligne a été ecrite, c'est que la requete a réussi
+        return ($query->rowCount() > 0);
+    }
+
+    /**
+     * Methode delete
+     * Supprime un prof de la BDD
+     *
+     * @return boolean
+     */
+    public function delete(): bool
+    {
+        // On se connecte a la BDD
+        $pdo = Database::getPDO();
+
+        // On ecrit la requete
+        $sql = '
+            DELETE FROM teacher 
+            WHERE id = :id;
+        ';
+
+        // La requete contient des champs qui pourraient etre manipulés par l'utilisateur, donc prepare
+        $query = $pdo->prepare($sql);
+
+        // On bind les tokens en prenant soin d'appliquer les bons filtres
         $query->bindValue(':id', $this->id, PDO::PARAM_INT);
 
         // Puis on execute la requete

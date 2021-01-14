@@ -193,4 +193,23 @@ class TeacherController extends CoreController
             $this->show('teacher/add', $viewVars);
         }
     }
+
+    /**
+     * Methode delete
+     * Permet de supprimer un prof dont l'id est en argument
+     *
+     * @param [type] $teacherId
+     * @return void
+     */
+    public function delete($teacherId) : void
+    {
+        // On créé un Teacher pre-remplit
+        $teacher = Teacher::find($teacherId);        
+
+        // On appelle la methode delete de Teacher
+        $teacher->delete();
+
+        // On redirige vers la liste
+        $this->list();
+    }
 }

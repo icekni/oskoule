@@ -67,7 +67,7 @@ $router->map(
     'teacher-addpost'
 );
 
-// Route pour afficher le formulaire d'ajout d'un prof
+// Route pour afficher le formulaire d'edition d'un prof
 $router->map(
     'GET',
     '/teacher/edit/[i:id]',
@@ -78,7 +78,7 @@ $router->map(
     'teacher-edit'
 );
 
-// Route qui recevra l'envoi du formulaire d'ajout d'un prof
+// Route qui recevra l'envoi du formulaire d'edition d'un prof
 $router->map(
     'POST',
     '/teacher/edit/[i:id]',
@@ -87,6 +87,17 @@ $router->map(
         'controller' => '\App\Controllers\TeacherController'
     ],
     'teacher-editpost'
+);
+
+// Route pour afficher le formulaire de suppression d'un prof
+$router->map(
+    'GET',
+    '/teacher/delete/[i:id]',
+    [
+        'method' => 'delete',
+        'controller' => '\App\Controllers\TeacherController'
+    ],
+    'teacher-delete'
 );
 
 // --------------------------------
