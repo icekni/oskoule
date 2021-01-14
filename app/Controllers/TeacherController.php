@@ -37,19 +37,18 @@ class TeacherController extends CoreController
     public function add() : void
     {
         // Il faut afficher la page pour ajouter un prof
-        // Vu qu'on va utiliser une seule vue pour l'ajout et la modification, je prepare un objet vide
-        $teacher = new Teacher();
 
-        // Je le transmets a la vue via $viewVars
-        $viewVars = [
-            'teacher' => $teacher,
-        ];
-
-        // Et j'affiche la page
-        $this->show('teacher/add', $viewVars);
+        // J'affiche la page
+        $this->show('teacher/add');
     }
 
-    public function addPost()
+    /**
+     * Methode addPost
+     * Elle recoit le formulaire d'ajout et insere dans la BDD
+     *
+     * @return void
+     */
+    public function addPost() : void
     {
         // On commence par récupérer et filtrer les données du formulaire
         $firstname = filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING);
