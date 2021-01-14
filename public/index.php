@@ -43,6 +43,19 @@ $router->map(
     'teacher-list'
 );
 
+// --------------------------------
+// Routes Student
+
+$router->map(
+    'GET',
+    '/student/list',
+    [
+        'method' => 'list',
+        'controller' => '\App\Controllers\StudentController'
+    ],
+    'student-list'
+);
+
 
 // ========================================
 // Dispatcher

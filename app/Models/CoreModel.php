@@ -7,10 +7,11 @@ use PDO;
 
 abstract class CoreModel
 {
-    // Les profs comme les eleves ont un id, un firstname et un lastname, on va donc pouvoir les mutualiser grace au CoreModel
+    // Les profs comme les eleves ont un id, un firstname, un lastname et un status, on va donc pouvoir les mutualiser grace au CoreModel
     protected $id;
     protected $firstname;
     protected $lastname;
+    protected $status;
 
     /**
      * Methode findAll
