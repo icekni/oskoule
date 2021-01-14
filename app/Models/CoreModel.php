@@ -13,36 +13,6 @@ abstract class CoreModel
     protected $lastname;
     protected $status;
 
-    /**
-     * Methode findAll
-     * Elle retourne un tableau contenant tout les *** (en focntion de la classe qui l'appelle)
-     *
-     * @return array
-     */
-    public static function findAll() : array
-    {
-        // A cause de la facto de la fonction, je dois recuperer le nom de la classe qui l'appelle
-        $classname = strtolower(preg_replace('`^(.*\\\\)`', '', static::class));
-
-        // On se connecte a la DB
-        $pdo = Database::getPDO();
-
-        // On ecrit la requete
-        $sql = '
-            SELECT *
-            FROM ' . $classname . ';
-        ';
-
-        // J'ai une variable, mais l'utilisateur ne devrait pas y avoir acces, donc pas besoin de prepare
-        // Je dois par contre query car j'attends de recevoir des données
-        $pdoStatement = $pdo->query($sql);
-
-        // Puis on fetchAll pour obtenir un tableau contenant des objet
-        $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, static::class);
-
-        return $result;
-    }
-
     public function save() {
         if($this->id != null){
             return $this->update();
@@ -61,18 +31,6 @@ abstract class CoreModel
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set the value of id
-     *
-     * @return  self
-     */ 
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     /**

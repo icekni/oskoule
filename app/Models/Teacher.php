@@ -12,6 +12,33 @@ class Teacher extends CoreModel
     // ========================================
     // Methodes specifiques
     // ========================================
+
+    /**
+     * Methode findAll
+     * Elle retourne un tableau contenant tout les profs
+     *
+     * @return array
+     */
+    public static function findAll() : array
+    {
+        // On se connecte a la DB
+        $pdo = Database::getPDO();
+
+        // On ecrit la requete
+        $sql = '
+            SELECT *
+            FROM teacher;
+        ';
+
+        // J'ai une variable, mais l'utilisateur ne devrait pas y avoir acces, donc pas besoin de prepare
+        // Je dois par contre query car j'attends de recevoir des données
+        $pdoStatement = $pdo->query($sql);
+
+        // Puis on fetchAll pour obtenir un tableau contenant des objet
+        $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, static::class);
+
+        return $result;
+    }
     
     public function insert()
     {

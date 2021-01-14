@@ -3,7 +3,8 @@
 // Premiere chose, require de l'autoload qui va require automatiquement nos librairies tierces
 require __DIR__ . '/../vendor/autoload.php';
 
-// TODO session_start()
+// On initialise la session
+session_start();
 
 // ========================================
 // Routes
@@ -101,6 +102,30 @@ $router->map(
     'student-addpost'
 );
 
+// --------------------------------
+// Route de connexion/deconnexion
+
+// Route pour se connecter
+$router->map(
+    'GET',
+    '/login',
+    [
+        'method' => 'login',
+        'controller' => '\App\Controllers\UserController'
+    ],
+    'user-login'
+);
+
+// Route pour receptionner le formulaire de connexion
+$router->map(
+    'POST',
+    '/login',
+    [
+        'method' => 'loginPost',
+        'controller' => '\App\Controllers\UserController'
+    ],
+    'user-loginpost'
+);
 
 // ========================================
 // Dispatcher
