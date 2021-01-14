@@ -27,4 +27,80 @@ class TeacherController extends CoreController
 
         $this->show('teacher/list', $viewVars);
     }
+
+    /**
+     * Methode add
+     * Elle affiche le formulaire d'ajout d'un prof
+     *
+     * @return void
+     */
+    public function add() : void
+    {
+        // Il faut afficher la page pour ajouter un prof
+        // Vu qu'on va utiliser une seule vue pour l'ajout et la modification, je prepare un objet vide
+        $teacher = new Teacher();
+
+        // Je le transmets a la vue via $viewVars
+        $viewVars = [
+            'teacher' => $teacher,
+        ];
+
+        // Et j'affiche la page
+        $this->show('teacher/add', $viewVars);
+    }
+
+    public function addPost()
+    {
+        // On commence par récupérer et filtrer les données du formulaire
+        $firstname = filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING);
+        $lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING);
+        $job = filter_input(INPUT_POST, 'job', FILTER_SANITIZE_STRING);
+        $status = filter_input(INPUT_POST, 'status', FILTER_SANITIZE_NUMBER_INT);
+
+        // On créé un tableau qui recevra les erreurs
+        $errorList = [];
+
+        // On verifie que les champs ne sont pas vides
+        if (empty($firstname)) {
+            $errorList['prenom'] = 'Le champ Prénom n\'est pas correctement remplit';
+        }
+        if (empty($lastname)) {
+            $errorList['nom'] = 'Le champ Nom n\'est pas correctement remplit';
+        }
+        if (empty($job)) {
+            $errorList['job'] = 'Le champ Titre n\'est pas correctement remplit';
+        }
+        if (empty($status)) {
+            $errorList['status'] = 'Le champ Status n\'est pas correctement remplit';
+        }
+
+        // S'il n'y a pas eu d'erreur jusque là, on peut inserer dans la BDD
+        if (empty($errorList)) {
+            // On commence par créé un nouvel objet Teacher
+            $teacher = new Teacher();
+
+            // On lui definit ses propriétés
+            $teacher->setFirstname($firstname);
+            $teacher->setLastname($lastname);
+            $teacher->setJob($job);
+            $teacher->setStatus($status);
+
+            // Puis on insere dans la BDD avec une condition pour verifier la reussite de la requete
+            if ($teacher->save()) {
+                // Si ca a reussi, on redirige vers la liste des profs
+                $this->list();
+            }
+            else {
+                // Sinon on ajoute une erreur dans $errorList et on affiche le formulaire d'ajout
+                $errorList['autre'] = 'L\'insertion en base de données à échouee';
+
+                // On passe les erreur en argument de show
+                $viewVars = [
+                    'errors' => $errorList,
+                ];
+
+                $this->show('teacher/add', $viewVars);
+            }
+        }
+    }
 }

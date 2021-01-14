@@ -43,6 +43,18 @@ abstract class CoreModel
         return $result;
     }
 
+    public function save() {
+        if($this->id != null){
+            return $this->update();
+        } else{
+            return $this->insert();
+        }
+    }
+
+    // ========================================
+    // Getters & Setters
+    // ========================================
+    
     /**
      * Get the value of id
      */ 

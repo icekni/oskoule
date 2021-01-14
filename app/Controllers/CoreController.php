@@ -14,6 +14,8 @@ abstract class CoreController
      */
     protected function show(string $viewName, $viewVars = []) : void
     {
+        global $router;
+
         // On stocke le nom de la vue courante dans $viewVars
         $viewVars['currentPage'] = $viewName;
 

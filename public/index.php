@@ -33,6 +33,7 @@ $router->map(
 // --------------------------------
 // Routes Teacher
 
+// Route pour afficher la liste des profs
 $router->map(
     'GET',
     '/teacher/list',
@@ -41,6 +42,28 @@ $router->map(
         'controller' => '\App\Controllers\TeacherController'
     ],
     'teacher-list'
+);
+
+// Route pour afficher le formulaire d'ajout d'un prof
+$router->map(
+    'GET',
+    '/teacher/add',
+    [
+        'method' => 'add',
+        'controller' => '\App\Controllers\TeacherController'
+    ],
+    'teacher-add'
+);
+
+// Route qui recevra l'envoi du formulaire d'ajout d'un prof
+$router->map(
+    'POST',
+    '/teacher/add',
+    [
+        'method' => 'addPost',
+        'controller' => '\App\Controllers\TeacherController'
+    ],
+    'teacher-addpost'
 );
 
 // --------------------------------
