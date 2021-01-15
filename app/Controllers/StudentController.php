@@ -58,6 +58,8 @@ class StudentController extends CoreController
      */
     public function addPost() : void
     {
+        global $router;
+
         // On commence par récupérer et filtrer les données du formulaire
         $firstname = filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING);
         $lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING);
@@ -96,7 +98,8 @@ class StudentController extends CoreController
             // Puis on insere dans la BDD avec une condition pour verifier la reussite de la requete
             if ($student->save()) {
                 // Si ca a reussi, on redirige vers la liste des etudiants
-                $this->list();
+                // Via header, car si je me contente de faire un show ou $this->list, le moindre F5 renverra la requete et provoquera surement une erreur
+                header('Location: ' . $router->generate('student-list'));
             }
             else {
                 // Sinon on ajoute une erreur dans $errorList et on affiche le formulaire d'ajout
@@ -151,6 +154,8 @@ class StudentController extends CoreController
      */
     public function editPost($studentId) : void
     {
+        global $router;
+
         // On commence par récupérer et filtrer les données du formulaire
         $firstname = filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING);
         $lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING);
@@ -190,7 +195,8 @@ class StudentController extends CoreController
             // Puis on insere dans la BDD avec une condition pour verifier la reussite de la requete
             if ($student->save()) {
                 // Si ca a reussi, on redirige vers la liste des etudiants
-                $this->list();
+                // Via header, car si je me contente de faire un show ou $this->list, le moindre F5 renverra la requete et provoquera surement une erreur
+                header('Location: ' . $router->generate('student-list'));
             }
             else {
                 // Sinon on ajoute une erreur dans $errorList et on affiche le formulaire d'ajout
@@ -225,6 +231,8 @@ class StudentController extends CoreController
      */
     public function delete($studentId) : void
     {
+        global $router;
+
         // On créé un Student pre-remplit
         $student = Student::find($studentId);        
 
@@ -232,6 +240,7 @@ class StudentController extends CoreController
         $student->delete();
 
         // On redirige vers la liste
-        $this->list();
+        // Via header, car si je me contente de faire un show ou $this->list, le moindre F5 renverra la requete et provoquera surement une erreur
+        header('Location: ' . $router->generate('student-list'));
     }
 }

@@ -4,13 +4,22 @@ namespace App\Controllers;
 
 abstract class CoreController
 {
+    // Je créé une propriete $token qui recevra le CSRF token
+    private $token;
+
     public function __construct()
     {
-        // Pour gerer les permissions, j'ai besoin de connaitre le nom de la route en cours
-        // Je dois donc aller la chercher dans $match
         global $match;
+        // Je recupere le nom de la route
         $routeName = $match['name'];
+        // Je profite du global $match pour tenter de recuperer mon token passé en GET (pour delete)
+        // Si jamais il n'est pas passé ni via GET, ni via POST, filter_input me renverra null donc pas d'erreur a prevoir
+        $this->token = isset($match['params']['token']) ? $match['params']['token'] : filter_input(INPUT_POST, 'token');
 
+        // ========================================
+        // Gestion des acces par role de l'utilisateur
+        // ========================================
+        
         // Tableau ACL qui va definir les acces aux pages
         $acl = [
             'main-home' => ['admin', 'user'],
@@ -32,20 +41,84 @@ abstract class CoreController
         ];
 
         // On doit verifier si le nom de la route en cours est bien dans le tableau
-        if(array_key_exists($routeName, $acl)){
+        if (array_key_exists($routeName, $acl)) {
             // Si oui, on recupere les roles autorisés pour cette page
             $authorizedRoles = $acl[$routeName];
             // Et on utilise la methode checkAuthorization pour verifier si l'utilisateur est autorisé a acceder a la page
             $this->checkAuthorization($authorizedRoles);
         }
+
+        // ========================================
+        // Anti CSRF
+        // ========================================
+
+        // Definition des pages a proteger
+        $csrfTokenToCheck = [
+            'user-login',
+            'teacher-addpost',
+            'teacher-editpost',
+            'teacher-delete',
+            'student-addpost',
+            'student-editpost',
+            'student-delete',
+            'user-addpost',
+            'user-editpost',
+            'user-delete',
+        ];
+
+        // Si la page en cours est dans le tableau, alors on verifie le token
+        if (in_array($routeName, $csrfTokenToCheck)) {
+            $this->checkCSRFToken();
+        }
+
+        // Plutot que generer le token dans chaque methode a proteger, je suis faignant et je le fais pour toutes les pages en une seule fois, via le construct du CoreController
+        // Il sera re-generer a chaque page, meme celles non protegées, mais c'est pas grave
+        // Le check ne se fera que sur celle dans le tableau $csrfTokenToCheck
+        // Mais meme si le check se faisait sur toutes les pages, ca n'en serait que plus securisé
+        // Bien sur je le fait apres le check, sinon le token en session aura changé avant le check et ne correspondra plus au token passé en GET ou POST
+        $this->generateCSRFToken();
+    }
+
+    /**
+     * Verification du token CSRF
+     *
+     * @return void
+     */
+    public function checkCSRFToken() : void
+    {
+        // Je recupere le token passé en session
+        $sessionToken = $_SESSION['csrfToken'];
+
+        // Je dois le comparer avec le token que j'ai recupéré dans $this->token
+        // Je dois verifier s'ils ne sont pas vides, car null = null et ca validerait la verification
+        if ($sessionToken !== $this->token || empty($sessionToken) || empty($this->token)) {
+            http_response_code(403);
+            $this->show('error/err403');
+            exit();
+        }
+    }
+
+    /**
+     * Methode pour generer un CSRF token
+     *
+     * @return string
+     */
+    protected function generateCSRFToken() : string
+    {
+        $byte = random_bytes(5);
+        $token = bin2hex($byte);
+
+        $_SESSION['csrfToken'] = $token;
+
+        return $token;
     }
 
     /**
      * Methode show
-     * Elle se charge de faire les require des template necessaire pour afficher la page indiquée dans $viewName
+     * Elle se charge de faire les require des templates necessaires pour afficher la page indiquée dans $viewName
      *
      * @param string $viewName est le nom de la vue a afficher, sous la forme 'dossier/fichierTPL
-     * @param array $viewVars contient les données a transmettre a la page
+     * @param array $viewVars contient les données a transmettre a la page et est optionnel
      * @return void
      */
     protected function show(string $viewName, $viewVars = []): void
@@ -71,7 +144,7 @@ abstract class CoreController
      * @param array $roles
      * @return bool (true = autorisé)
      */
-    protected function checkAuthorization($roles = []) : bool
+    protected function checkAuthorization($roles = []): bool
     {
         global $router;
 

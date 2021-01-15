@@ -1,28 +1,27 @@
-        <a href="<?= $router->generate('teacher-add'); ?>" class="btn btn-success float-right">Ajouter</a>
+        <a href="<?= $router->generate('user-add'); ?>" class="btn btn-success float-right">Ajouter</a>
 
-        <h2>Liste des Profs</h2>
+        <h2>Liste des Utilisateurs</h2>
         <table class="table table-hover mt-4">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Prénom</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Nom</th>
-                    <th scope="col">Titre</th>
+                    <th scope="col">Role</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-
-                <!-- Boucle foreach qui va parcourir le tableau $teachers et afficher une ligne par teacher -->
-                <?php foreach ($teachers as $teacher) : ?>
-
+                <!-- Boucle pour afficher les users un par un -->
+                <?php foreach ($users as $user) : ?>
+                    
                 <tr>
-                    <th scope="row"><?= $teacher->getId(); ?></th>
-                    <td><?= $teacher->getFirstname(); ?></td>
-                    <td><?= $teacher->getLastname(); ?></td>
-                    <td><?= $teacher->getJob(); ?></td>
+                    <th scope="row"><?= $user->getId(); ?></th>
+                    <td><?= $user->getEmail(); ?></td>
+                    <td><?= $user->getName(); ?></td>
+                    <td><?= $user->getRole(); ?></td>
                     <td class="text-right">
-                        <a href="<?= $router->generate('teacher-edit', ['id' => $teacher->getId()]); ?>" class="btn btn-sm btn-warning">
+                        <a href="<?= $router->generate('user-edit', ['id' => $user->getId()]); ?>" class="btn btn-sm btn-warning">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         </a>
                         <div class="btn-group">
@@ -31,13 +30,13 @@
                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="<?= $router->generate('teacher-delete', ['id' => $teacher->getId(), 'token' => $_SESSION['csrfToken']])?>">Oui, je veux supprimer</a>
+                                <a class="dropdown-item" href="<?= $router->generate('user-delete', ['id' => $user->getId(), 'token' => $_SESSION['csrfToken']]); ?>">Oui, je veux supprimer</a>
                                 <a class="dropdown-item" href="#" data-toggle="dropdown">Oups !</a>
                             </div>
                         </div>
                     </td>
                 </tr>
                 <?php endforeach; ?>
-
+                
             </tbody>
         </table>

@@ -39,6 +39,10 @@
                         <?php endif; ?>
                 
                     </div>
+
+                    <!-- Protection anti CSRF -->
+                    <input type="hidden" value="<?= $_SESSION['csrfToken']; ?>" name="token">
+
                     <button type="submit" class="btn btn-primary btn-block mt-4">se connecter</button>
                 </form>
             </div>

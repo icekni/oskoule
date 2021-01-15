@@ -92,7 +92,7 @@ $router->map(
 // Route pour afficher le formulaire de suppression d'un prof
 $router->map(
     'GET',
-    '/teacher/delete/[i:id]',
+    '/teacher/delete/[i:id]/[a:token]?',
     [
         'method' => 'delete',
         'controller' => '\App\Controllers\TeacherController'
@@ -103,6 +103,7 @@ $router->map(
 // --------------------------------
 // Routes Student
 
+// Route pour afficher la liste des etudiants
 $router->map(
     'GET',
     '/student/list',
@@ -160,7 +161,7 @@ $router->map(
 // Route pour afficher le formulaire de suppression d'un etudiant
 $router->map(
     'GET',
-    '/student/delete/[i:id]',
+    '/student/delete/[i:id]/[a:token]?',
     [
         'method' => 'delete',
         'controller' => '\App\Controllers\StudentController'
@@ -204,6 +205,72 @@ $router->map(
     'user-logout'
 );
 
+// Route pour afficher la liste des users
+$router->map(
+    'GET',
+    '/user/list',
+    [
+        'method' => 'list',
+        'controller' => '\App\Controllers\UserController'
+    ],
+    'user-list'
+);
+
+// Route pour afficher le formulaire d'ajout d'un user
+$router->map(
+    'GET',
+    '/user/add',
+    [
+        'method' => 'add',
+        'controller' => '\App\Controllers\UserController'
+    ],
+    'user-add'
+);
+
+// Route qui recevra l'envoi du formulaire d'ajout d'un user
+$router->map(
+    'POST',
+    '/user/add',
+    [
+        'method' => 'addPost',
+        'controller' => '\App\Controllers\UserController'
+    ],
+    'user-addpost'
+);
+
+// Route pour afficher le formulaire d'edition d'un user
+$router->map(
+    'GET',
+    '/user/edit/[i:id]',
+    [
+        'method' => 'edit',
+        'controller' => '\App\Controllers\UserController'
+    ],
+    'user-edit'
+);
+
+// Route qui recevra l'envoi du formulaire d'edition d'un user
+$router->map(
+    'POST',
+    '/user/edit/[i:id]',
+    [
+        'method' => 'editPost',
+        'controller' => '\App\Controllers\UserController'
+    ],
+    'user-editpost'
+);
+
+// Route pour afficher le formulaire de suppression d'un user
+$router->map(
+    'GET',
+    '/user/delete/[i:id]/[a:token]?',
+    [
+        'method' => 'delete',
+        'controller' => '\App\Controllers\UserController'
+    ],
+    'user-delete'
+);
+
 // ========================================
 // Dispatcher
 // ========================================
@@ -213,5 +280,6 @@ $match = $router->match();
 
 // On transmet au dispatcher de Ben avec comme argument le controller et la methode (static) pour afficher la page 404
 $dispatcher = new Dispatcher($match, '\App\Controllers\ErrorController::err404');
+
 // Et on dispatch
 $dispatcher->dispatch();

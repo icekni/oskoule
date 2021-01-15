@@ -15,4 +15,9 @@ class MainController extends CoreController
         // La home n'a pas besoin d'avoir de donnée fournie, donc on l'appelle telle quelle
         $this->show('main/home');
     }
+
+    public function test()
+    {
+        # code...
+    }
 }

@@ -50,6 +50,8 @@ class TeacherController extends CoreController
      */
     public function addPost() : void
     {
+        global $router;
+
         // On commence par récupérer et filtrer les données du formulaire
         $firstname = filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING);
         $lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING);
@@ -69,7 +71,7 @@ class TeacherController extends CoreController
         if (empty($job)) {
             $errorList['job'] = 'Le champ Titre n\'est pas correctement remplit';
         }
-        if (empty($status)) {
+        if (empty($status) || !preg_match('`[1-2]`', $status)) {
             $errorList['status'] = 'Le champ Status n\'est pas correctement remplit';
         }
 
@@ -87,7 +89,8 @@ class TeacherController extends CoreController
             // Puis on insere dans la BDD avec une condition pour verifier la reussite de la requete
             if ($teacher->save()) {
                 // Si ca a reussi, on redirige vers la liste des profs
-                $this->list();
+                // Via header, car si je me contente de faire un show ou $this->list, le moindre F5 renverra la requete et provoquera surement une erreur
+                header('Location: ' . $router->generate('teacher-list'));
             }
             else {
                 // Sinon on ajoute une erreur dans $errorList et on affiche le formulaire d'ajout
@@ -137,6 +140,8 @@ class TeacherController extends CoreController
      */
     public function editPost($teacherId) : void
     {
+        global $router;
+
         // On recupere les données du formulaire        
         $firstname = filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING);
         $lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING);
@@ -174,7 +179,8 @@ class TeacherController extends CoreController
             // Puis on insere dans la BDD avec une condition pour verifier la reussite de la requete
             if ($teacher->save()) {
                 // Si ca a reussi, on redirige vers la liste des profs
-                $this->list();
+                // Via header, car si je me contente de faire un show ou $this->list, le moindre F5 renverra la requete et provoquera surement une erreur
+                header('Location: ' . $router->generate('teacher-list'));
             }
             else {
                 // Sinon on ajoute une erreur dans $errorList et on affiche le formulaire d'ajout
@@ -203,6 +209,8 @@ class TeacherController extends CoreController
      */
     public function delete($teacherId) : void
     {
+        global $router;
+
         // On créé un Teacher pre-remplit
         $teacher = Teacher::find($teacherId);        
 
@@ -210,6 +218,7 @@ class TeacherController extends CoreController
         $teacher->delete();
 
         // On redirige vers la liste
-        $this->list();
+        // Via header, car si je me contente de faire un show ou $this->list, le moindre F5 renverra la requete et provoquera surement une erreur
+        header('Location: ' . $router->generate('teacher-list'));
     }
 }

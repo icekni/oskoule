@@ -29,7 +29,7 @@
                             </button>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item"
-                                    href="<?= $router->generate('student-delete', ['id' => $student->getId()]); ?>">Oui, je veux
+                                    href="<?= $router->generate('student-delete', ['id' => $student->getId(), 'token' => $_SESSION['csrfToken']]); ?>">Oui, je veux
                                     supprimer</a>
                                 <a class="dropdown-item" href="#" data-toggle="dropdown">Oups !</a>
                             </div>
@@ -37,5 +37,6 @@
                     </td>
                 </tr>
                 <?php endforeach; ?>
+                
             </tbody>
         </table>

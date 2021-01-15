@@ -48,9 +48,9 @@ class AppUser extends CoreModel
      * Cherche si un utilisateur correspond à l'email passé en argument
      *
      * @param [type] $email correspond à l'email de l'user recherché
-     * @return object
+     * @return object ou bool
      */
-    public static function findByEmail($email) : object
+    public static function findByEmail($email)
     {
         // On se connecte a la DB
         $pdo = Database::getPDO();
@@ -75,6 +75,159 @@ class AppUser extends CoreModel
         $result = $query->fetchObject(self::class);
 
         return $result;
+    }
+
+    /**
+     * Methode find
+     * Elle permet de retourner toutes les infos de l'user dont l'id est passé en argument
+     *
+     * @param [type] $userId est l'id de l'user
+     * @return object ou bool
+     */
+    public static function find($userId)
+    {
+        // On se connecte a la DB
+        $pdo = Database::getPDO();
+
+        // On ecrit la requete
+        $sql = '
+            SELECT *
+            FROM app_user
+            WHERE app_user.id = :id;
+        ';
+
+        // On utilise prepare car il y a une variable manipulable
+        $query = $pdo->prepare($sql);
+
+        // On bind le token
+        $query->bindValue(':id', $userId, PDO::PARAM_INT);
+
+        // On execute la requete
+        $query->execute();
+
+        // On fetch pour obtenir un objet
+        $result = $query->fetchObject(static::class);
+
+        return $result;
+    }
+    
+    /**
+     * Methode insert
+     * Pour inserer dans la base de donnée un user
+     *
+     * @return boolean true si l'insertion s'est bien passée, sinon false
+     */
+    public function insert()
+    {
+        // On se connecte a la BDD
+        $pdo = Database::getPDO();
+
+        // On ecrit la requete
+        $sql = '
+            INSERT INTO app_user (
+                email,
+                name,
+                password,
+                role,
+                status
+            ) VALUES (
+                :email,
+                :name,
+                :password,
+                :role,
+                :status
+            );
+        ';
+
+        // La requete contient des champs qui pourraient etre manipulés par l'utilisateur, donc prepare
+        $query = $pdo->prepare($sql);
+
+        // On bind les tokens en prenant soin d'appliquer les bons filtres
+        $query->bindValue(':email', $this->email, PDO::PARAM_STR);
+        $query->bindValue(':name', $this->name, PDO::PARAM_STR);
+        // Normalement notre mot de passe sera deja filtré par la regex, donc pas besoin de filtre
+        $query->bindValue(':password', $this->password);
+        $query->bindValue(':role', $this->role, PDO::PARAM_STR);
+        $query->bindValue(':status', $this->status, PDO::PARAM_INT);
+
+        // Puis on execute la requete
+        $query->execute();
+
+        // Si au moin une ligne a été ecrite, c'est que la requete a réussi
+        return ($query->rowCount() > 0);
+    }
+
+    /**
+     * Methode update
+     * Met a jour un user dans la BDD
+     *
+     * @return boolean
+     */
+    public function update(): bool
+    {
+        // On se connecte a la BDD
+        $pdo = Database::getPDO();
+
+        // On ecrit la requete
+        $sql = '
+            UPDATE app_user 
+            SET
+                email = :email,
+                name = :name,
+                password = :password,
+                role = :role,
+                status = :status,       
+                updated_at = NOW()
+            WHERE id = :id;
+        ';
+
+        // La requete contient des champs qui pourraient etre manipulés par l'utilisateur, donc prepare
+        $query = $pdo->prepare($sql);
+
+        // On bind les tokens en prenant soin d'appliquer les bons filtres
+        $query->bindValue(':email', $this->email, PDO::PARAM_STR);
+        $query->bindValue(':name', $this->name, PDO::PARAM_STR);
+        // Normalement notre mot de passe sera deja filtré par la regex, donc pas besoin de filtre
+        $query->bindValue(':password', $this->password);
+        $query->bindValue(':role', $this->role, PDO::PARAM_STR);
+        $query->bindValue(':status', $this->status, PDO::PARAM_INT);
+        $query->bindValue(':id', $this->id, PDO::PARAM_INT);
+
+        // Puis on execute la requete
+        $query->execute();
+
+        // Si au moin une ligne a été ecrite, c'est que la requete a réussi
+        return ($query->rowCount() > 0);
+    }
+
+    /**
+     * Methode delete
+     * Supprime un user de la BDD
+     *
+     * @return boolean
+     */
+    public function delete(): bool
+    {
+        // On se connecte a la BDD
+        $pdo = Database::getPDO();
+
+        // On ecrit la requete
+        $sql = '
+            DELETE FROM app_user 
+            WHERE id = :id;
+        ';
+
+        // La requete contient des champs qui pourraient etre manipulés par l'utilisateur, donc prepare
+        $query = $pdo->prepare($sql);
+
+        // On bind les tokens en prenant soin d'appliquer les bons filtres
+        $query->bindValue(':id', $this->id, PDO::PARAM_INT);
+
+        // Puis on execute la requete
+        $query->execute();
+
+        // Si au moin une ligne a été ecrite, c'est que la requete a réussi
+        return ($query->rowCount() > 0);
     }
 
     // ========================================
