@@ -37,7 +37,7 @@
             <div class="form-group">
                 <label for="password">Mot de passe</label>
                 <input type="password" class="form-control" name="password" id="password" placeholder="" value="" aria-describedby="passwordHelp">
-                <!-- Et bien sur on ne pre-remplit pas le champs password :-) -->
+                <!-- Et bien sur on ne pre-remplit pas le champs password, de toutes facons avec le hash, on ne pourrait pas :-) -->
                 <!-- Affichage des erreurs champ par champ -->
                 <?php if (isset($errors['password'])) : ?>
                 
