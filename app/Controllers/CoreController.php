@@ -9,6 +9,12 @@ abstract class CoreController
 
     public function __construct()
     {
+        // En cas d'inactivité prolongée, le csrfToken passé en session disparait, donc je dois gerer ce cas et renvoyer vers la page logout dans ce cas
+        if (!isset($_SESSION['csrfToken'])) {
+            global $router;
+            header('Location: ' . $router->generate('user-logout'));
+        }
+
         global $match;
         // Je recupere le nom de la route
         $routeName = $match['name'];
