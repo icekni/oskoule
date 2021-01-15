@@ -37,7 +37,7 @@ $router->map(
 // Route pour afficher la liste des profs
 $router->map(
     'GET',
-    '/teacher/list',
+    '/teachers/list',
     [
         'method' => 'list',
         'controller' => '\App\Controllers\TeacherController'
@@ -48,7 +48,7 @@ $router->map(
 // Route pour afficher le formulaire d'ajout d'un prof
 $router->map(
     'GET',
-    '/teacher/add',
+    '/teachers/add',
     [
         'method' => 'add',
         'controller' => '\App\Controllers\TeacherController'
@@ -59,7 +59,7 @@ $router->map(
 // Route qui recevra l'envoi du formulaire d'ajout d'un prof
 $router->map(
     'POST',
-    '/teacher/add',
+    '/teachers/add',
     [
         'method' => 'addPost',
         'controller' => '\App\Controllers\TeacherController'
@@ -70,7 +70,7 @@ $router->map(
 // Route pour afficher le formulaire d'edition d'un prof
 $router->map(
     'GET',
-    '/teacher/[i:id]',
+    '/teachers/[i:id]',
     [
         'method' => 'edit',
         'controller' => '\App\Controllers\TeacherController'
@@ -81,7 +81,7 @@ $router->map(
 // Route qui recevra l'envoi du formulaire d'edition d'un prof
 $router->map(
     'POST',
-    '/teacher/[i:id]',
+    '/teachers/[i:id]',
     [
         'method' => 'editPost',
         'controller' => '\App\Controllers\TeacherController'
@@ -92,7 +92,7 @@ $router->map(
 // Route pour afficher le formulaire de suppression d'un prof
 $router->map(
     'GET',
-    '/teacher/[i:id]/delete/[a:token]?',
+    '/teachers/[i:id]/delete/[a:token]?',
     [
         'method' => 'delete',
         'controller' => '\App\Controllers\TeacherController'
@@ -106,7 +106,7 @@ $router->map(
 // Route pour afficher la liste des etudiants
 $router->map(
     'GET',
-    '/student/list',
+    '/students/list',
     [
         'method' => 'list',
         'controller' => '\App\Controllers\StudentController'
@@ -117,7 +117,7 @@ $router->map(
 // Route pour afficher le formulaire d'ajout d'un etudiant
 $router->map(
     'GET',
-    '/student/add',
+    '/students/add',
     [
         'method' => 'add',
         'controller' => '\App\Controllers\StudentController'
@@ -128,7 +128,7 @@ $router->map(
 // Route qui recevra l'envoi du formulaire d'ajout d'un etudiant
 $router->map(
     'POST',
-    '/student/add',
+    '/students/add',
     [
         'method' => 'addPost',
         'controller' => '\App\Controllers\StudentController'
@@ -139,7 +139,7 @@ $router->map(
 // Route pour afficher le formulaire d'edition d'un etudiant
 $router->map(
     'GET',
-    '/student/[i:id]',
+    '/students/[i:id]',
     [
         'method' => 'edit',
         'controller' => '\App\Controllers\StudentController'
@@ -150,7 +150,7 @@ $router->map(
 // Route qui recevra l'envoi du formulaire d'edition d'un etudiant
 $router->map(
     'POST',
-    '/student/[i:id]',
+    '/students/[i:id]',
     [
         'method' => 'editPost',
         'controller' => '\App\Controllers\StudentController'
@@ -161,7 +161,7 @@ $router->map(
 // Route pour afficher le formulaire de suppression d'un etudiant
 $router->map(
     'GET',
-    '/student/[i:id]/delete/[a:token]?',
+    '/students/[i:id]/delete/[a:token]?',
     [
         'method' => 'delete',
         'controller' => '\App\Controllers\StudentController'
@@ -175,7 +175,7 @@ $router->map(
 // Route pour se connecter
 $router->map(
     'GET',
-    '/login',
+    '/signin',
     [
         'method' => 'login',
         'controller' => '\App\Controllers\UserController'
@@ -186,7 +186,7 @@ $router->map(
 // Route pour receptionner le formulaire de connexion
 $router->map(
     'POST',
-    '/login',
+    '/signin',
     [
         'method' => 'loginPost',
         'controller' => '\App\Controllers\UserController'
@@ -197,7 +197,7 @@ $router->map(
 // Route pour se connecter
 $router->map(
     'GET',
-    '/logout',
+    '/signout',
     [
         'method' => 'logout',
         'controller' => '\App\Controllers\UserController'
@@ -208,7 +208,7 @@ $router->map(
 // Route pour afficher la liste des users
 $router->map(
     'GET',
-    '/user/list',
+    '/appusers/',
     [
         'method' => 'list',
         'controller' => '\App\Controllers\UserController'
@@ -219,7 +219,7 @@ $router->map(
 // Route pour afficher le formulaire d'ajout d'un user
 $router->map(
     'GET',
-    '/user/add',
+    '/appusers/add',
     [
         'method' => 'add',
         'controller' => '\App\Controllers\UserController'
@@ -230,7 +230,7 @@ $router->map(
 // Route qui recevra l'envoi du formulaire d'ajout d'un user
 $router->map(
     'POST',
-    '/user/add',
+    '/appusers/add',
     [
         'method' => 'addPost',
         'controller' => '\App\Controllers\UserController'
@@ -241,7 +241,7 @@ $router->map(
 // Route pour afficher le formulaire d'edition d'un user
 $router->map(
     'GET',
-    '/user/[i:id]',
+    '/appusers/[i:id]',
     [
         'method' => 'edit',
         'controller' => '\App\Controllers\UserController'
@@ -252,7 +252,7 @@ $router->map(
 // Route qui recevra l'envoi du formulaire d'edition d'un user
 $router->map(
     'POST',
-    '/user/[i:id]',
+    '/appusers/[i:id]',
     [
         'method' => 'editPost',
         'controller' => '\App\Controllers\UserController'
@@ -263,7 +263,7 @@ $router->map(
 // Route pour afficher le formulaire de suppression d'un user
 $router->map(
     'GET',
-    '/user/[i:id]/delete/[a:token]?',
+    '/appusers/[i:id]/delete/[a:token]?',
     [
         'method' => 'delete',
         'controller' => '\App\Controllers\UserController'
