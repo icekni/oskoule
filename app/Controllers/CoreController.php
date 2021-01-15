@@ -91,6 +91,7 @@ abstract class CoreController
     public function checkCSRFToken(): void
     {
         // Je recupere le token passé en session
+        // En cas d'inactivité, l'index csrfToken disparait de $_SESSION, donc dans ce cas, je renvois null, ca provoquera une erreur 403 et l'utilisateur devra se reconnecter
         $sessionToken = isset($_SESSION['csrfToken']) ? $_SESSION['csrfToken'] : null;
 
         // Je dois le comparer avec le token que j'ai recupéré dans $this->token
