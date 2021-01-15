@@ -77,7 +77,7 @@ class StudentController extends CoreController
             $errorList['nom'] = 'Le champ Nom n\'est pas correctement remplit';
         }
         // Le champ status devra avoir comme valeur, soit 1, soit 2
-        if (empty($status) || !preg_match('`[1-2]`', $status)) {
+        if (empty($status) || !preg_match('`1|2`', $status)) {
             $errorList['status'] = 'Le champ Status n\'est pas correctement remplit';
         }
         if (empty($teacher)) {
@@ -173,7 +173,7 @@ class StudentController extends CoreController
             $errorList['nom'] = 'Le champ Nom n\'est pas correctement remplit';
         }
         // Le champ status devra avoir comme valeur, soit 1, soit 2
-        if (empty($status) || !preg_match('`[1-2]`', $status)) {
+        if (empty($status) || !preg_match('`1|2`', $status)) {
             $errorList['status'] = 'Le champ Status n\'est pas correctement remplit';
         }
         if (empty($teacher)) {

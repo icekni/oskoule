@@ -71,7 +71,7 @@ class TeacherController extends CoreController
         if (empty($job)) {
             $errorList['job'] = 'Le champ Titre n\'est pas correctement remplit';
         }
-        if (empty($status) || !preg_match('`[1-2]`', $status)) {
+        if (empty($status) || !preg_match('`1|2`', $status)) {
             $errorList['status'] = 'Le champ Status n\'est pas correctement remplit';
         }
 
@@ -161,7 +161,7 @@ class TeacherController extends CoreController
         if (empty($job)) {
             $errorList['job'] = 'Le champ Titre n\'est pas correctement remplit';
         }
-        if (empty($status)) {
+        if (empty($status) || !preg_match('`1|2`', $status)) {
             $errorList['status'] = 'Le champ Status n\'est pas correctement remplit';
         }
 

@@ -78,7 +78,7 @@ class UserController extends CoreController
         if (empty($role) || !preg_match('`user|admin`', $role)) {
             $errorList['role'] = 'Le champ Role n\'est pas correctement remplit';
         }
-        if (empty($status) || !preg_match('`[1-2]`', $status)) {
+        if (empty($status) || !preg_match('`1|2`', $status)) {
             $errorList['status'] = 'Le champ Status n\'est pas correctement remplit';
         }
 
@@ -183,7 +183,7 @@ class UserController extends CoreController
         if (empty($role) || !preg_match('`user|admin`', $role)) {
             $errorList['role'] = 'Le champ Role n\'est pas correctement remplit';
         }
-        if (empty($status) || !preg_match('`[1-2]`', $status)) {
+        if (empty($status) || !preg_match('`1|2`', $status)) {
             $errorList['status'] = 'Le champ Status n\'est pas correctement remplit';
         }
 
