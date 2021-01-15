@@ -12,7 +12,10 @@ abstract class CoreController
         global $match;
         // Je recupere le nom de la route
         $routeName = $match['name'];
-        // Je profite du global $match pour tenter de recuperer mon token passé en GET (pour delete)
+        //? j'ai aussi pensé a utiliser setControllersArguments, methode d'altoDispatcher, pour passer $match en argument au construct du CoreController, ca me permettrait d'eviter de faire global $match
+        //? Je me demande meme si on pourrait pas passer $router aussi et le stocker dans une propriete pour eviter le global $router partout
+
+        // Je profite du global $match pour tenter de recuperer mon token passé en GET (pour delete), ou si ce n'est pas dans $match, je regarde dans le POST
         // Si jamais il n'est pas passé ni via GET, ni via POST, filter_input me renverra null donc pas d'erreur a prevoir
         $this->token = isset($match['params']['token']) ? $match['params']['token'] : filter_input(INPUT_POST, 'token');
 
