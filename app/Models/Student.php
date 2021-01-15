@@ -96,7 +96,7 @@ class Student extends CoreModel
                 :firstname,
                 :lastname,
                 :status,
-                teacher_id
+                :teacher_id
             );
         ';
 
@@ -107,6 +107,7 @@ class Student extends CoreModel
         $query->bindValue(':firstname', $this->firstname, PDO::PARAM_STR);
         $query->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
         $query->bindValue(':status', $this->status, PDO::PARAM_INT);
+        $query->bindValue(':teacher_id', $this->teacher_id, PDO::PARAM_INT);
 
         // Puis on execute la requete
         $query->execute();

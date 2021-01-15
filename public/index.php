@@ -70,7 +70,7 @@ $router->map(
 // Route pour afficher le formulaire d'edition d'un prof
 $router->map(
     'GET',
-    '/teacher/edit/[i:id]',
+    '/teacher/[i:id]',
     [
         'method' => 'edit',
         'controller' => '\App\Controllers\TeacherController'
@@ -81,7 +81,7 @@ $router->map(
 // Route qui recevra l'envoi du formulaire d'edition d'un prof
 $router->map(
     'POST',
-    '/teacher/edit/[i:id]',
+    '/teacher/[i:id]',
     [
         'method' => 'editPost',
         'controller' => '\App\Controllers\TeacherController'
@@ -92,7 +92,7 @@ $router->map(
 // Route pour afficher le formulaire de suppression d'un prof
 $router->map(
     'GET',
-    '/teacher/delete/[i:id]/[a:token]?',
+    '/teacher/[i:id]/delete/[a:token]?',
     [
         'method' => 'delete',
         'controller' => '\App\Controllers\TeacherController'
@@ -139,7 +139,7 @@ $router->map(
 // Route pour afficher le formulaire d'edition d'un etudiant
 $router->map(
     'GET',
-    '/student/edit/[i:id]',
+    '/student/[i:id]',
     [
         'method' => 'edit',
         'controller' => '\App\Controllers\StudentController'
@@ -150,7 +150,7 @@ $router->map(
 // Route qui recevra l'envoi du formulaire d'edition d'un etudiant
 $router->map(
     'POST',
-    '/student/edit/[i:id]',
+    '/student/[i:id]',
     [
         'method' => 'editPost',
         'controller' => '\App\Controllers\StudentController'
@@ -161,7 +161,7 @@ $router->map(
 // Route pour afficher le formulaire de suppression d'un etudiant
 $router->map(
     'GET',
-    '/student/delete/[i:id]/[a:token]?',
+    '/student/[i:id]/delete/[a:token]?',
     [
         'method' => 'delete',
         'controller' => '\App\Controllers\StudentController'
@@ -241,7 +241,7 @@ $router->map(
 // Route pour afficher le formulaire d'edition d'un user
 $router->map(
     'GET',
-    '/user/edit/[i:id]',
+    '/user/[i:id]',
     [
         'method' => 'edit',
         'controller' => '\App\Controllers\UserController'
@@ -252,7 +252,7 @@ $router->map(
 // Route qui recevra l'envoi du formulaire d'edition d'un user
 $router->map(
     'POST',
-    '/user/edit/[i:id]',
+    '/user/[i:id]',
     [
         'method' => 'editPost',
         'controller' => '\App\Controllers\UserController'
@@ -263,7 +263,7 @@ $router->map(
 // Route pour afficher le formulaire de suppression d'un user
 $router->map(
     'GET',
-    '/user/delete/[i:id]/[a:token]?',
+    '/user/[i:id]/delete/[a:token]?',
     [
         'method' => 'delete',
         'controller' => '\App\Controllers\UserController'
