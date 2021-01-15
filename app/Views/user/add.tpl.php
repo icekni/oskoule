@@ -36,7 +36,7 @@
             </div>
             <div class="form-group">
                 <label for="password">Mot de passe</label>
-                <input type="password" class="form-control" name="password" id="password" placeholder="" value="">
+                <input type="password" class="form-control" name="password" id="password" placeholder="" value="" aria-describedby="passwordHelp">
                 <!-- Et bien sur on ne pre-remplit pas le champs password :-) -->
                 <!-- Affichage des erreurs champ par champ -->
                 <?php if (isset($errors['password'])) : ?>
@@ -45,6 +45,9 @@
                 <?= $errors['password']; ?>
                 </div>
                 <?php endif; ?>
+
+                <small id="passwordHelp" class="form-text text-muted">Minimum 8 caracteres, dont au moins 1 majuscule, 1 minuscule et 1 caractere special                    
+                </small>
                 
             </div>
             <div class="form-group">
