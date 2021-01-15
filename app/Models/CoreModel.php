@@ -8,6 +8,7 @@ use PDO;
 abstract class CoreModel
 {
     // Les profs comme les eleves ont un id, un firstname, un lastname et un status, on va donc pouvoir les mutualiser grace au CoreModel
+    //? ca n'est plus vrai depuis la gestion des users, mais c'est pas grave, ca fera juste des propriétés vides
     protected $id;
     protected $firstname;
     protected $lastname;

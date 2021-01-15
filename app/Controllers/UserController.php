@@ -74,7 +74,8 @@ class UserController extends CoreController
         if (empty($password) || !preg_match('`^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[-_|%&*=@$])[-_|%&*=@$a-zA-Z0-9]{8,}$`', $password)) {
             $errorList['password'] = 'Le champ Password n\'est pas correctement remplit';
         }
-        if (empty($role)) {
+        // Le champ role ne peut contenir que user ou admin
+        if (empty($role) || !preg_match('`user|admin`', $role)) {
             $errorList['role'] = 'Le champ Role n\'est pas correctement remplit';
         }
         if (empty($status) || !preg_match('`[1-2]`', $status)) {
@@ -178,7 +179,8 @@ class UserController extends CoreController
         if (empty($password) || !preg_match('`^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[-_|%&*=@$])[-_|%&*=@$a-zA-Z0-9]{8,}$`', $password)) {
             $errorList['password'] = 'Le champ Password n\'est pas correctement remplit';
         }
-        if (empty($role)) {
+        // Le champ role ne peut contenir que user ou admin
+        if (empty($role) || !preg_match('`user|admin`', $role)) {
             $errorList['role'] = 'Le champ Role n\'est pas correctement remplit';
         }
         if (empty($status) || !preg_match('`[1-2]`', $status)) {

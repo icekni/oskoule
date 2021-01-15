@@ -22,7 +22,7 @@ class AppUser extends CoreModel
      *
      * @return array
      */
-    public static function findAll() : array
+    public static function findAll(): array
     {
         // On se connecte a la DB
         $pdo = Database::getPDO();
@@ -42,13 +42,13 @@ class AppUser extends CoreModel
 
         return $result;
     }
-    
+
     /**
      * Methode findByEmail
      * Cherche si un utilisateur correspond à l'email passé en argument
      *
      * @param [type] $email correspond à l'email de l'user recherché
-     * @return object ou bool
+     * @return object contenant l'utilisateur ou boolean false si l'utilisateur n'existe pas
      */
     public static function findByEmail($email)
     {
@@ -82,7 +82,7 @@ class AppUser extends CoreModel
      * Elle permet de retourner toutes les infos de l'user dont l'id est passé en argument
      *
      * @param [type] $userId est l'id de l'user
-     * @return object ou bool
+     * @return object contenant l'utilisateur ou boolean false si l'utilisateur n'existe pas
      */
     public static function find($userId)
     {
@@ -110,14 +110,14 @@ class AppUser extends CoreModel
 
         return $result;
     }
-    
+
     /**
      * Methode insert
      * Pour inserer dans la base de donnée un user
      *
      * @return boolean true si l'insertion s'est bien passée, sinon false
      */
-    public function insert()
+    public function insert(): bool
     {
         // On se connecte a la BDD
         $pdo = Database::getPDO();
@@ -236,7 +236,7 @@ class AppUser extends CoreModel
 
     /**
      * Get the value of email
-     */ 
+     */
     public function getEmail()
     {
         return $this->email;
@@ -246,7 +246,7 @@ class AppUser extends CoreModel
      * Set the value of email
      *
      * @return  self
-     */ 
+     */
     public function setEmail($email)
     {
         $this->email = $email;
@@ -256,7 +256,7 @@ class AppUser extends CoreModel
 
     /**
      * Get the value of name
-     */ 
+     */
     public function getName()
     {
         return $this->name;
@@ -266,7 +266,7 @@ class AppUser extends CoreModel
      * Set the value of name
      *
      * @return  self
-     */ 
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -276,7 +276,7 @@ class AppUser extends CoreModel
 
     /**
      * Get the value of password
-     */ 
+     */
     public function getPassword()
     {
         return $this->password;
@@ -286,7 +286,7 @@ class AppUser extends CoreModel
      * Set the value of password
      *
      * @return  self
-     */ 
+     */
     public function setPassword($password)
     {
         $this->password = $password;
@@ -296,7 +296,7 @@ class AppUser extends CoreModel
 
     /**
      * Get the value of role
-     */ 
+     */
     public function getRole()
     {
         return $this->role;
@@ -306,7 +306,7 @@ class AppUser extends CoreModel
      * Set the value of role
      *
      * @return  self
-     */ 
+     */
     public function setRole($role)
     {
         $this->role = $role;
