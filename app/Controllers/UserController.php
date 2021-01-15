@@ -12,7 +12,7 @@ class UserController extends CoreController
      *
      * @return void
      */
-    public function list() : void
+    public function list(): void
     {
         // On va devoir recuperer la liste des users
         // Pour ca il faudra utiliser la methode findAll qui nous retournera un tableau contenant a chaque index un prof
@@ -23,7 +23,7 @@ class UserController extends CoreController
         // Pour plus de clarté, je vais utiliser une variable intermediaire $viewVars
         $viewVars = [
             'users' => $users,
-        ];        
+        ];
 
         $this->show('user/list', $viewVars);
     }
@@ -34,7 +34,7 @@ class UserController extends CoreController
      *
      * @return void
      */
-    public function add() : void
+    public function add(): void
     {
         // Il faut afficher la page pour ajouter un user
 
@@ -48,7 +48,7 @@ class UserController extends CoreController
      *
      * @return void
      */
-    public function addPost() : void
+    public function addPost(): void
     {
         global $router;
 
@@ -105,8 +105,7 @@ class UserController extends CoreController
                 // Si ca a reussi, on redirige vers la liste des users
                 // Via header, car si je me contente de faire un show ou $this->list, le moindre F5 renverra la requete et provoquera surement une erreur
                 header('Location: ' . $router->generate('user-list'));
-            }
-            else {
+            } else {
                 // Sinon on ajoute une erreur dans $errorList et on affiche le formulaire d'ajout
                 $errorList['autre'] = 'L\'insertion en base de données à échouee';
             }
@@ -122,7 +121,6 @@ class UserController extends CoreController
             // On affiche la page de login
             $this->show('user/add', $viewVars);
         }
-        
     }
 
     /**
@@ -132,7 +130,7 @@ class UserController extends CoreController
      * @param [type] $userId est l'id du user a editer
      * @return void
      */
-    public function edit($userId) : void
+    public function edit($userId): void
     {
         // On doit afficher la vue user/add, mais avec les champs pre-remplit
         // On commence par aller chercher les infos du user dont l'id est passé dans l'url
@@ -153,7 +151,7 @@ class UserController extends CoreController
      * @param [type] $userId est l'id du user a editer
      * @return void
      */
-    public function editPost($userId) : void
+    public function editPost($userId): void
     {
         global $router;
 
@@ -205,8 +203,7 @@ class UserController extends CoreController
                 // Si ca a reussi, on redirige vers la liste des users
                 // Via header, car si je me contente de faire un show ou $this->list, le moindre F5 renverra la requete et provoquera surement une erreur
                 header('Location: ' . $router->generate('user-list'));
-            }
-            else {
+            } else {
                 // Sinon on ajoute une erreur dans $errorList et on affiche le formulaire d'ajout
                 $errorList['autre'] = 'L\'insertion en base de données à échouee';
             }
@@ -231,12 +228,12 @@ class UserController extends CoreController
      * @param [type] $userId
      * @return void
      */
-    public function delete($userId) : void
+    public function delete($userId): void
     {
         global $router;
 
         // On créé un AppUser pre-remplit
-        $user = AppUser::find($userId);        
+        $user = AppUser::find($userId);
 
         // On appelle la methode delete de AppUser
         $user->delete();
@@ -252,7 +249,7 @@ class UserController extends CoreController
      *
      * @return void
      */
-    public function login() : void
+    public function login(): void
     {
         // Affichage de la page de connexion
         $this->show('user/login');
@@ -264,15 +261,15 @@ class UserController extends CoreController
      *
      * @return void
      */
-    public function loginpost() : void
+    public function loginpost(): void
     {
         // On commence par recuperer les données du formulaire
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         // Sans filtre pour password pour ne pas encoder les caracteres speciaux
-        $password = filter_input(INPUT_POST, 'password');        
+        $password = filter_input(INPUT_POST, 'password');
 
         // On prepare notre tableau d'erreur
-        $errorList =[];
+        $errorList = [];
 
         // Verifications du bon remplissage des champs
         if (empty($email)) {

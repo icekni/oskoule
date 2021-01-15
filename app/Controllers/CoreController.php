@@ -19,7 +19,7 @@ abstract class CoreController
         // ========================================
         // Gestion des acces par role de l'utilisateur
         // ========================================
-        
+
         // Tableau ACL qui va definir les acces aux pages
         $acl = [
             'main-home' => ['admin', 'user'],
@@ -72,9 +72,9 @@ abstract class CoreController
             $this->checkCSRFToken();
         }
 
-        // Plutot que generer le token dans chaque methode a proteger, je suis faignant et je le fais pour toutes les pages en une seule fois, via le construct du CoreController
+        // Plutot que generer le token dans chaque page qui mene à une methode à proteger, je suis faignant et je le fais pour toutes les pages en une seule fois, via le construct du CoreController
         // Il sera re-generer a chaque page, meme celles non protegées, mais c'est pas grave
-        // Le check ne se fera que sur celle dans le tableau $csrfTokenToCheck
+        // Le check ne se fera que sur celles dans le tableau $csrfTokenToCheck
         // Mais meme si le check se faisait sur toutes les pages, ca n'en serait que plus securisé
         // Bien sur je le fait apres le check, sinon le token en session aura changé avant le check et ne correspondra plus au token passé en GET ou POST
         $this->generateCSRFToken();
@@ -85,7 +85,7 @@ abstract class CoreController
      *
      * @return void
      */
-    public function checkCSRFToken() : void
+    public function checkCSRFToken(): void
     {
         // Je recupere le token passé en session
         $sessionToken = $_SESSION['csrfToken'];
@@ -102,9 +102,9 @@ abstract class CoreController
     /**
      * Methode pour generer un CSRF token
      *
-     * @return string
+     * @return string qui correspond au token
      */
-    protected function generateCSRFToken() : string
+    protected function generateCSRFToken(): string
     {
         $byte = random_bytes(5);
         $token = bin2hex($byte);

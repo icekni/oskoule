@@ -14,10 +14,11 @@ abstract class CoreModel
     protected $lastname;
     protected $status;
 
-    public function save() {
-        if($this->id != null){
+    public function save()
+    {
+        if ($this->id != null) {
             return $this->update();
-        } else{
+        } else {
             return $this->insert();
         }
     }
@@ -25,10 +26,10 @@ abstract class CoreModel
     // ========================================
     // Getters & Setters
     // ========================================
-    
+
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -36,7 +37,7 @@ abstract class CoreModel
 
     /**
      * Get the value of firstname
-     */ 
+     */
     public function getFirstname()
     {
         return $this->firstname;
@@ -46,7 +47,7 @@ abstract class CoreModel
      * Set the value of firstname
      *
      * @return  self
-     */ 
+     */
     public function setFirstname($firstname)
     {
         $this->firstname = $firstname;
@@ -56,7 +57,7 @@ abstract class CoreModel
 
     /**
      * Get the value of lastname
-     */ 
+     */
     public function getLastname()
     {
         return $this->lastname;
@@ -66,7 +67,7 @@ abstract class CoreModel
      * Set the value of lastname
      *
      * @return  self
-     */ 
+     */
     public function setLastname($lastname)
     {
         $this->lastname = $lastname;
@@ -76,7 +77,7 @@ abstract class CoreModel
 
     /**
      * Get the value of status
-     */ 
+     */
     public function getStatus()
     {
         return $this->status;
@@ -86,7 +87,7 @@ abstract class CoreModel
      * Set the value of status
      *
      * @return  self
-     */ 
+     */
     public function setStatus($status)
     {
         $this->status = $status;

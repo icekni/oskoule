@@ -12,7 +12,7 @@ class TeacherController extends CoreController
      *
      * @return void
      */
-    public function list() : void
+    public function list(): void
     {
         // On va devoir recuperer la liste des profs
         // Pour ca il faudra utiliser la methode findAll qui nous retournera un tableau contenant a chaque index un prof
@@ -23,7 +23,7 @@ class TeacherController extends CoreController
         // Pour plus de clarté, je vais utiliser une variable intermediaire $viewVars
         $viewVars = [
             'teachers' => $teachers,
-        ];        
+        ];
 
         $this->show('teacher/list', $viewVars);
     }
@@ -34,7 +34,7 @@ class TeacherController extends CoreController
      *
      * @return void
      */
-    public function add() : void
+    public function add(): void
     {
         // Il faut afficher la page pour ajouter un prof
 
@@ -48,7 +48,7 @@ class TeacherController extends CoreController
      *
      * @return void
      */
-    public function addPost() : void
+    public function addPost(): void
     {
         global $router;
 
@@ -91,8 +91,7 @@ class TeacherController extends CoreController
                 // Si ca a reussi, on redirige vers la liste des profs
                 // Via header, car si je me contente de faire un show ou $this->list, le moindre F5 renverra la requete et provoquera surement une erreur
                 header('Location: ' . $router->generate('teacher-list'));
-            }
-            else {
+            } else {
                 // Sinon on ajoute une erreur dans $errorList et on affiche le formulaire d'ajout
                 $errorList['autre'] = 'L\'insertion en base de données à échouee';
             }
@@ -117,7 +116,7 @@ class TeacherController extends CoreController
      * @param [type] $teacherId est l'id du prof a editer
      * @return void
      */
-    public function edit($teacherId) : void
+    public function edit($teacherId): void
     {
         // On doit afficher la vue teacher/add, mais avec les champs pre-remplit
         // On commence par aller chercher les infos du prof dont l'id est passé dans l'url
@@ -138,7 +137,7 @@ class TeacherController extends CoreController
      * @param [type] $teacherId est l'id du prof a editer
      * @return void
      */
-    public function editPost($teacherId) : void
+    public function editPost($teacherId): void
     {
         global $router;
 
@@ -181,8 +180,7 @@ class TeacherController extends CoreController
                 // Si ca a reussi, on redirige vers la liste des profs
                 // Via header, car si je me contente de faire un show ou $this->list, le moindre F5 renverra la requete et provoquera surement une erreur
                 header('Location: ' . $router->generate('teacher-list'));
-            }
-            else {
+            } else {
                 // Sinon on ajoute une erreur dans $errorList et on affiche le formulaire d'ajout
                 $errorList['autre'] = 'L\'insertion en base de données à échouee';
             }
@@ -207,12 +205,12 @@ class TeacherController extends CoreController
      * @param [type] $teacherId
      * @return void
      */
-    public function delete($teacherId) : void
+    public function delete($teacherId): void
     {
         global $router;
 
         // On créé un Teacher pre-remplit
-        $teacher = Teacher::find($teacherId);        
+        $teacher = Teacher::find($teacherId);
 
         // On appelle la methode delete de Teacher
         $teacher->delete();

@@ -13,7 +13,7 @@ class StudentController extends CoreController
      *
      * @return void
      */
-    public function list() : void
+    public function list(): void
     {
         // On va devoir recuperer la liste des etudiants
         // Pour ca il faudra utiliser la methode findAll qui nous retournera un tableau contenant a chaque index un prof
@@ -24,7 +24,7 @@ class StudentController extends CoreController
         // Pour plus de clarté, je vais utiliser une variable intermediaire $viewVars
         $viewVars = [
             'students' => $students,
-        ];        
+        ];
 
         $this->show('student/list', $viewVars);
     }
@@ -35,7 +35,7 @@ class StudentController extends CoreController
      *
      * @return void
      */
-    public function add() : void
+    public function add(): void
     {
         // Il faut afficher la page pour ajouter un etudiant
         // Pour dynamiser le select correspondant aux profs, il faut recuperer tout les profs
@@ -56,7 +56,7 @@ class StudentController extends CoreController
      *
      * @return void
      */
-    public function addPost() : void
+    public function addPost(): void
     {
         global $router;
 
@@ -100,8 +100,7 @@ class StudentController extends CoreController
                 // Si ca a reussi, on redirige vers la liste des etudiants
                 // Via header, car si je me contente de faire un show ou $this->list, le moindre F5 renverra la requete et provoquera surement une erreur
                 header('Location: ' . $router->generate('student-list'));
-            }
-            else {
+            } else {
                 // Sinon on ajoute une erreur dans $errorList et on affiche le formulaire d'ajout
                 $errorList['autre'] = 'L\'insertion en base de données à échouee';
             }
@@ -117,7 +116,6 @@ class StudentController extends CoreController
             // On affiche la page de login
             $this->show('student/add', $viewVars);
         }
-        
     }
 
     /**
@@ -127,12 +125,12 @@ class StudentController extends CoreController
      * @param [type] $studentId est l'id du etudiant a editer
      * @return void
      */
-    public function edit($studentId) : void
+    public function edit($studentId): void
     {
         // On doit afficher la vue student/add, mais avec les champs pre-remplit
         // On commence par aller chercher les infos du etudiant dont l'id est passé dans l'url
         $student = Student::find($studentId);
-        
+
         // Pour dynamiser le select correspondant aux profs, il faut recuperer tout les profs
         $teachers = Teacher::findAll();
 
@@ -152,7 +150,7 @@ class StudentController extends CoreController
      * @param [type] $studentId est l'id du etudiant a editer
      * @return void
      */
-    public function editPost($studentId) : void
+    public function editPost($studentId): void
     {
         global $router;
 
@@ -197,8 +195,7 @@ class StudentController extends CoreController
                 // Si ca a reussi, on redirige vers la liste des etudiants
                 // Via header, car si je me contente de faire un show ou $this->list, le moindre F5 renverra la requete et provoquera surement une erreur
                 header('Location: ' . $router->generate('student-list'));
-            }
-            else {
+            } else {
                 // Sinon on ajoute une erreur dans $errorList et on affiche le formulaire d'ajout
                 $errorList['autre'] = 'L\'insertion en base de données à échouee';
             }
@@ -229,12 +226,12 @@ class StudentController extends CoreController
      * @param [type] $studentId
      * @return void
      */
-    public function delete($studentId) : void
+    public function delete($studentId): void
     {
         global $router;
 
         // On créé un Student pre-remplit
-        $student = Student::find($studentId);        
+        $student = Student::find($studentId);
 
         // On appelle la methode delete de Student
         $student->delete();

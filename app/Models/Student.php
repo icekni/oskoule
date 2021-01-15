@@ -19,7 +19,7 @@ class Student extends CoreModel
      *
      * @return array
      */
-    public static function findAll() : array
+    public static function findAll(): array
     {
         // On se connecte a la DB
         $pdo = Database::getPDO();
@@ -73,7 +73,7 @@ class Student extends CoreModel
 
         return $result;
     }
-    
+
     /**
      * Methode insert
      * Pour inserer dans la base de donnée un etudiant
@@ -189,10 +189,10 @@ class Student extends CoreModel
     // ========================================
     // Getters & Setters
     // ========================================
-    
+
     /**
      * Get the value of teacher_id
-     */ 
+     */
     public function getTeacher_id()
     {
         return $this->teacher_id;
@@ -202,7 +202,7 @@ class Student extends CoreModel
      * Set the value of teacher_id
      *
      * @return  self
-     */ 
+     */
     public function setTeacher_id($teacher_id)
     {
         $this->teacher_id = $teacher_id;
