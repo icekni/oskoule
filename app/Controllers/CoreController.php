@@ -9,12 +9,6 @@ abstract class CoreController
 
     public function __construct()
     {
-        // En cas d'inactivité prolongée, le csrfToken passé en session disparait, donc je dois gerer ce cas et renvoyer vers la page logout dans ce cas
-        if (!array_key_exists('csrfToken', $_SESSION)) {
-            global $router;
-            header('Location: ' . $router->generate('user-logout'));
-        }
-
         global $match;
         // Je recupere le nom de la route
         $routeName = $match['name'];
@@ -97,7 +91,7 @@ abstract class CoreController
     public function checkCSRFToken(): void
     {
         // Je recupere le token passé en session
-        $sessionToken = $_SESSION['csrfToken'];
+        $sessionToken = isset($_SESSION['csrfToken']) ? $_SESSION['csrfToken'] : null;
 
         // Je dois le comparer avec le token que j'ai recupéré dans $this->token
         // Je dois verifier s'ils ne sont pas vides, car null = null et ca validerait la verification
