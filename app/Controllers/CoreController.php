@@ -35,9 +35,10 @@ abstract class CoreController
             'student-edit' => ['admin', 'user'],
             'student-editpost' => ['admin', 'user'],
             'student-delete' => ['admin', 'user'],
-            'user-list' => ['admin', 'user'],
-            'user-add' => ['admin', 'user'],
-            'user-addpost' => ['admin', 'user'],
+            'user-list' => ['admin'],
+            'user-add' => ['admin'],
+            'user-addpost' => ['admin'],
+            'user-delete' => ['admin'],
         ];
 
         // On doit verifier si le nom de la route en cours est bien dans le tableau

@@ -18,7 +18,7 @@
                         <a class="nav-link" href="<?= $router->generate('student-list'); ?>">Etudiants</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../appuser/list.html">Utilisateurs</a>
+                        <a class="nav-link<?= $currentPage === 'user/list' ? ' active' : '' ?>" href="<?= $router->generate('user-list'); ?>">Utilisateurs</a>
                     </li>
                     <li class="nav-item<?= $currentPage === 'user/logout' ? ' active' : '' ?>">
                         <a class="nav-link" href="<?= $router->generate('user-logout'); ?>">Se déconnecter</a>
