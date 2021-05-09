@@ -75,7 +75,7 @@ abstract class CoreController
             $this->checkCSRFToken();
         }
 
-        // Plutot que generer le token dans chaque page qui mene à une methode à proteger, je suis faignant et je le fais pour toutes les pages en une seule fois, via le construct du CoreController
+        // Plutot que generer le token dans chaque page qui mene à une methode à proteger, je le fais pour toutes les pages en une seule fois, via le construct du CoreController
         // Il sera re-generer a chaque page, meme celles non protegées, mais c'est pas grave
         // Le check ne se fera que sur celles dans le tableau $csrfTokenToCheck
         // Mais meme si le check se faisait sur toutes les pages, ca n'en serait que plus securisé

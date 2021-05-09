@@ -23,6 +23,11 @@ abstract class CoreModel
         }
     }
 
+    // Pour que la méthode save() fonctionne bien, chaque Model doit avoir déclaré les méthodes insert et update en protected
+    // Donc, puisque CoreModel est une classe abstraite, on peut forcer les classes "enfants" à déclarer (implémenter) ces méthodes
+    protected abstract function insert();
+    protected abstract function update();
+
     // ========================================
     // Getters & Setters
     // ========================================
